@@ -6,11 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     //Rigidbody 프로퍼티, 속도 값
     public Rigidbody playerRigidbody;
-    public float speed = 0.8f;
+    public float speed = 8f;
     
     void Update()
     {
-        //키보드 입력 이벤트
+        //키보드 입력 이벤트 화살표 조종
         if (Input.GetKey(KeyCode.UpArrow) == true)
         {
             playerRigidbody.AddForce(0f, 0f, speed);
