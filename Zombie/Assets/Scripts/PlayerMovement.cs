@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
         // 사용할 컴포넌트들의 참조를 가져오기
+        playerInput = GetComponent<PlayerInput>();
+        playerRigidbody = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // FixedUpdate는 물리 갱신 주기에 맞춰 실행됨
@@ -24,12 +27,14 @@ public class PlayerMovement : MonoBehaviour {
 
     // 입력값에 따라 캐릭터를 앞뒤로 움직임
     private void Move() {
-        Vector3 moveDistance = playerInput.move * transform.forward * moveSpeed * Time.deltaTime;
+        Vector3 moveDistance = playerInput.move * transform.forward * moveSpeed * Time.deltaTime;   // 입력값 * 앞쪽 방향 * 속도 * 시간
+                                                                                                    // 입력이 없으면 move = 0 앞쪽은 1
         playerRigidbody.MovePosition(playerRigidbody.position + moveDistance);
     }
 
     // 입력값에 따라 캐릭터를 좌우로 회전
     private void Rotate() {
-
+        float turn = playerInput.rotate * rotateSpeed * Time.deltaTime;
+        playerRigidbody.rotation = playerRigidbody.rotation * Quaternion.Euler(0, turn, 0);
     }
 }
